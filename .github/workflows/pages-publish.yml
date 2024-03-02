@@ -29,15 +29,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Dotnet Setup
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4.0.0
         with:
           dotnet-version: 8.x
 
       - run: dotnet tool update -g docfx
-      - run: docfx docfx.json
+      - run: docfx .github/docfx.json
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3.0.0
         with:
           # Upload entire repository
           name: docs-artifact
@@ -45,7 +45,7 @@ jobs:
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v4.0.4
         with:
           # Specify the target directory for deployment
           target-folder: csharp/
